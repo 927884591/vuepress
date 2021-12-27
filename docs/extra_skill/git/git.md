@@ -21,8 +21,8 @@
 git的选项命令都是使用--
 
 ```
-$ git config --global user.name shfshanyue
-$ git config --global user.email xianger94@gmail.com
+$ git config --global user.name test
+$ git config --global user.email test@qq.com
 ```
 
 > 这两个是最重要的命令，
@@ -48,5 +48,22 @@ git clone <地址>    //克隆指定的项目地址到当前目录中
 git add -all //将仓库中的所有文件添加到暂存区
 git commit  //暂存区提交到本地仓库
 git status //查看git的状态。
+git push  //推送到远程仓库中
 ```
 
+### 生成密钥
+
+为什么要生成密钥，主要是为了方便推送到远程仓库，
+
+使用git生成会得到
+
+- 私钥
+- 公钥
+
+生成密钥命令
+
+```
+ssh-keygen -t rsa -C "8888@163.com" //123 是你自己注册GitHub的邮箱
+```
+
+然后到密钥的目录中找出公钥文件复制到github中即可。
