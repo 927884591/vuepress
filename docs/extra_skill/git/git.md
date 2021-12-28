@@ -38,8 +38,6 @@ git config --global --list //列出全局的配置选项
 git config --system --list //列出系统的配置选项
 ```
 
-
-
 ### 基本使用
 
 ```
@@ -49,7 +47,32 @@ git add -all //将仓库中的所有文件添加到暂存区
 git commit  //暂存区提交到本地仓库
 git status //查看git的状态。
 git push  //推送到远程仓库中
+git remote -v    //查看远程仓库的信息
 ```
+
+### git的多人协助
+
+> 多人协助是git重要的功能之一。
+
+```
+git branch -a 	//显示所有的本地分支和远程分支
+git branch -r  	//显示远程仓库的分支
+git checkout -b 分支名   //新建本地分支并且切换到该分支中
+git branch -d 分支名    //删除该分支
+git merge 分支名   //合并该分支到本分支中
+git push origin -d 分支名	 //删除远程分支
+```
+
+> git中的origin指的是使用远程仓库
+
+### git中的后悔药
+
+```
+git checkout
+git reset 
+```
+
+
 
 ### 生成密钥
 

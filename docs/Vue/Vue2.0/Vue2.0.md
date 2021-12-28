@@ -769,3 +769,139 @@ template中可以使用标签获取或者类获取
   </body>
 ```
 
+### 组件插槽
+
+> 插槽主要是为了提升组件的扩展性，
+
+```html
+<body>
+    <div id="app">
+      <p>组件的基本使用</p>
+      <div>{{msg}}</div>
+      <cpn>
+        <div>444</div>
+      </cpn>
+      <div>----------</div>
+      <cpn></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <div>111</div>
+        <div>222</div>
+        <slot>333</slot>
+        <!-- cpn标签汇中没有写有则默认使用<slot></slot>标签中的模版 -->
+      </div>
+    </template>
+    <script>
+      let cpn = {
+        template: "#cpn", //组件构造器
+      };
+      let app = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello，world",
+        },
+        components: {
+          cpn, //注册组件
+        },
+      });
+    </script>
+  </body>
+```
+
+### 具名插槽
+
+只有使用该名字的才会替换，如果没有则使用默认的指定插槽
+
+```html
+<body>
+    <div id="app">
+      <p>组件的基本使用</p>
+      <div>{{msg}}</div>
+      <cpn>
+        <div slot="center">444</div> <!--只有name的属性值为center才会修改，意思就是把属性值为center的slot插槽替换成该语句 -->
+      </cpn>
+      <div>----------</div>
+      <cpn></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <div>111</div>
+        <div>222</div>
+        <slot name="left"><span>左边</span></slot>
+        <slot name="center"><span>中间</span></slot>
+        <slot name="right"><span>右边</span></slot>
+        <!-- cpn标签汇中没有写有则默认使用<slot></slot>标签中的模版 -->
+      </div>
+    </template>
+    <script>
+      let cpn = {
+        template: "#cpn", //组件构造器
+      };
+      let app = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello，world",
+        },
+        components: {
+          cpn, //注册组件
+        },
+      });
+    </script>
+  </body>
+```
+
+### 作用域插槽
+
+作用域插槽是为了使用子组件里的数据，而不是父组件里的数据
+
+我们在使用组件时拿到的数据都是父组件的，而我们想在组件
+
+```html
+<body>
+    <div id="app">
+      <p>组件的基本使用</p>
+      <div>{{msg}}</div>
+      <cpn>
+        <template slot="center" slot-scope="slot"> 	//这里的slot是引用了子组件的data数据，slot-scope是固定写法
+          <ul>
+            <li v-for="item in slot.data">{{item}}</li>		//这里的data就是子组件的data数据
+          </ul>
+        </template>
+      </cpn>
+      <div>----------</div>
+      <cpn></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <div>111</div>
+        <div>222</div>
+        <slot name="left"><span>左边</span></slot>
+        <slot name="center" :data="languages"><span>中间</span></slot>			//这里的data是可以随便取的名字，但引用时需要属性名一致
+        <slot name="right"><span>右边</span></slot>
+        <!-- cpn标签汇中没有写有则默认使用<slot></slot>标签中的模版 -->
+      </div>
+    </template>
+    <script>
+      let cpn = {
+        template: "#cpn", //组件构造器
+        data() {
+          return {
+            languages: ["javascript", "java", "c++", "c#"],    //子组件的数据
+          };
+        },
+      };
+      let app = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello，world",
+        },
+        components: {
+          cpn, //注册组件
+        },
+      });
+    </script>
+  </body>
+```
+
+> 总结：slot标签中可以使用nam标签属性（具名插槽），而自定义的绑定属性就是作用域插槽。
