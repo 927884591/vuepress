@@ -15,13 +15,13 @@
 
 es6 的语法是使用
 
-```html
+```javascript
 export { 导出的object or var or function or class }
 ```
 
 导入
 
-```html
+```javascript
 import{导入的变量} from "导入的文件"
 ```
 
@@ -37,13 +37,13 @@ import{导入的变量} from "导入的文件"
 
 ## 定义别的名字
 
-```html
+```javascript
 export default 导出的内容 //只可以导出一个
 ```
 
 ## 导入所有变量
 
-```html
+```javascript
 import * as 对象名 from "引入文件路径"
 //它会把引入文件中的所有变量放到你命名的对象命名中，如果想访问直接： 对象名.xxx
 ```
