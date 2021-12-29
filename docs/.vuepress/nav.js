@@ -18,6 +18,7 @@ module.exports = [
     items: [
       { text: "Markdown的基本使用", link: "/extra_skill/Markdown/" },
       { text: "git和github的使用", link: "/extra_skill/git/" },
+      { text: "前端模块化的理解以及使用", link: "/extra_skill/moduel/" },
     ],
   },
   {
