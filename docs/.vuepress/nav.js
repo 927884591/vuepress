@@ -20,6 +20,7 @@ module.exports = [
       { text: "git和github的使用", link: "/extra_skill/git/" },
       { text: "前端模块化的理解以及使用", link: "/extra_skill/moduel/" },
       { text: "linux的基本使用（待完善）", link: "/extra_skill/linux/" },
+      { text: "webpack的基本使用", link: "/extra_skill/webpack/" },
     ],
   },
   {

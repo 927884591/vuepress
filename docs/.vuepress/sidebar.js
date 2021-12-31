@@ -6,5 +6,6 @@ module.exports = {
   "/extra_skill/git/": require("../extra_skill/git/sidebar"),
   "/extra_skill/moduel/": require("../extra_skill/moduel/sidebar"),
   "/extra_skill/linux/": require("../extra_skill/linux/sidebar"),
+  "/extra_skill/webpack/": require("../extra_skill/webpack/sidebar"),
   "/item/XiaomiShop/": require("../item/XiaomiShop/sidebar.js"),
 };
