@@ -1,5 +1,6 @@
 ## vue3
 
+<<<<<<< HEAD
 ### watch的基本使用
 
 会监听data的数据变化，一旦变化则会触发watch监听事件，做一些逻辑的处理
@@ -40,5 +41,18 @@ watch:{
     immediate:true //页面刷新后会立即执行一次，因为oldValue没有值，则oldValue是一个undefined。 
   }
 }
+=======
+### 基本语法  
+
+```js
+vue.createApp({
+    template:""
+    data(){//vue3中一定要选择方法来使用data否则会报错
+    return {
+        
+    }
+}
+})
+>>>>>>> 5254aeb61b9397b55f2cd03c2e616190a518338c
 ```
 
