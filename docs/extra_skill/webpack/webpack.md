@@ -18,6 +18,10 @@ webpack 入口文件 打包完后输出的目标目录
 
 webpack的配置文件必须为
 
+```js
+webpack --config "你想取的名字.js"		//给webpack.config.js起别名
+```
+
 webpack.config.js    否则会报错没有找到配置文件
 
 ```javascript
