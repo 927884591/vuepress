@@ -13,3 +13,30 @@ vue.createApp({
 })
 ```
 
+动态绑定一个对象
+
+```html
+<body>
+    <div id="app">
+        {{message}}
+        <div v-bind="obj">yes</div>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    message: "hello world",
+                    value: "style",
+                    obj: {
+                        name: "ZHANGSAN",
+                        age: 18,
+                        height: 1.88
+                    }
+                }
+            }
+        }).mount("#app")
+    </script>
+
+</body>
+```
+
