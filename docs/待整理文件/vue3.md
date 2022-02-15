@@ -1,6 +1,7 @@
 ## vue3
 
 <<<<<<< HEAD
+
 ### watch的基本使用
 
 会监听data的数据变化，一旦变化则会触发watch监听事件，做一些逻辑的处理
@@ -81,5 +82,53 @@ vue.createApp({
     </script>
 
 </body>
+```
+
+### 父子组件之间的传递
+
+与vue2的区别是子传父，发送自定义时间时需要自己定义一个emits属性
+
+```js
+export default {
+    data(){
+        return{
+            //这里写data数据
+        }
+    }，
+    emits：["add","sub"],//相对余vue2多了这个步骤，需要声明事件
+    clickEvent(){//有个按钮触发这个事件
+        this.$emit("add",需要传的值)//发送上面声明好的事件名称，也可以传值
+    }
+}
+```
+
+### 非父子组件通信
+
+非父子组件通信指的是兄弟组件祖孙组件之间的通信
+
+```js
+//提供数据的组件
+export default {
+    data(){
+        return{
+            //这里写data数据
+        }
+    }，
+   	provide:{
+    name:"zhansan",
+    age:18
+}
+    
+}
+//接收数据的组件
+export default {
+    data(){
+        return{
+            //这里写data数据
+        }
+    }，
+	inject:["name","age"]//然后你就可以在自己的组件使用，这些数据就像data那样使用
+    
+}
 ```
 
