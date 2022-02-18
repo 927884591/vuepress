@@ -132,3 +132,176 @@ export default {
 }
 ```
 
+### 具名插槽
+
+```vue
+//App.vue文件
+<template>
+  <cpn>
+    <template v-slot:hhh> hhh </template> //需要用一个template标签包裹，v-slot指定对应的插槽名称
+  </cpn>
+</template>
+
+<script>
+import Cpn from "./components/Cpn.vue";
+export default {
+  name: "App",
+  components: {
+    Cpn,
+  },
+};
+</script>
+
+//Cpn.vue文件
+<template>
+  <div>
+    <h2>哈哈哈</h2>
+    <slot name="hhh"></slot>//指定哪个名称的插槽填入这个地方
+    <div>yes</div>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+```
+
+v-slot的语法糖是#号
+
+```vue
+<template #hhh> hhh </template> //使用v-slot的语法糖
+```
+
+### 动态组件     
+
+```vue
+<component :is="全局注册的组件或者局部注册的组件名称"></component>
+```
+
+### keep-alive
+
+这个很简单，只需要一个keep-alive标签包裹需要保留状态的组件即可
+
+```vue
+<keep-alive>
+    //里边写需要保留状态的组件
+</keep-alive>
+```
+
+### $refs
+
+ 在vue中不推荐我们直接操作DOM，所有vue给了我们这个接口，可以获取DOM元素和组件
+
+```html
+<template>
+	<h2 ref="title">
+        哈哈哈哈
+    </h2>
+    <button @click="eventClick">
+        获取h2元素
+    </button>
+</template>
+<script>
+	export default {
+        methods:{
+            eventClick(){
+                console.log(this.$refs.title)
+            }
+        }
+    }
+</script>
+```
+
+![image-20220216120349594](C:\Users\ye\AppData\Roaming\Typora\typora-user-images\image-20220216120349594.png)
+
+**如果这个给组件使用的话，可以调用组件的methods，data等这个组件的所有信息**
+
+### $parent和$root
+
+parent可以获取父组件的，而root可以获取根组件，这两个开发中都很少使用，因为把获取到的信息在子组件或者子孙组件使用的话可能会报错，因为你不知道父组件或者根组件到底有没有这个变量。
+
+### $el
+
+获取到的是组件的父元素。
+
+### 生命周期
+
+![image-20220216122710687](C:\Users\ye\AppData\Roaming\Typora\typora-user-images\image-20220216122710687.png)
+
+- beforeCreate   //组件创建之前
+- created    //组件创建之后
+- beforeMount    //组件挂在之前
+- mounted     //组件挂在之后
+  - beforeUpdate      //组件数据发生更新之前
+  - updated  //组件数据发生更新之后
+- beforeUnmount     //组件摧毁之前
+- Unmounted   //组件摧毁之后
+
+对于有缓存的组件（keep-alive标签包裹的组件）可以使用activated和deactivated生命周期
+
+### vue3的过渡动画
+
+如果想单个组件或者单个元素添加动画的话可以使用trasform内置的全局组件包裹
+
+```vue
+<trasition name="test"> //这个name属性是一个类名头
+	//需要添加动画的元素写在这里
+</trasition>
+<style scoped>
+	.
+</style>
+```
+
+### Mixin
+
+组件相关的内容，就是组件与组件有相同的逻辑，相同的逻辑我们希望抽取出来，我们就可以使用Mixin
+
+使用跟data和methods同级
+
+```js
+//demoMixin
+export const demoMixin = {
+    data(){
+        
+    },
+    methods:{
+        
+    }
+}
+//App.vue
+<template>
+</template>
+<script>
+      import demoMixin from "demoMixin" //导入混入文件
+      export default {
+mixins:[demoMixin]
+}
+</script>
+```
+
+Mixin自己的合并规则
+
+![image-20220218014409855](C:\Users\ye\AppData\Roaming\Typora\typora-user-images\image-20220218014409855.png)
+
+### Composition API
+
+在vue3以后使用的都是composition API不会像vue2使用例如一下配置：
+
+```js
+export default{
+    data(){
+        return{
+            
+        }
+    },
+    methods:{
+        
+    },
+    computed:{
+        
+    },
+    //生命周期函数
+}
+```
+
+但vue3也是兼容这个语法。 
