@@ -1,6 +1,6 @@
 ## vue3
 
-<<<<<<< HEAD
+  
 
 ### watch的基本使用
 
@@ -305,3 +305,82 @@ export default{
 ```
 
 但vue3也是兼容这个语法。 
+
+Composition API不支持this操作，也默认没有响应式。如果需要响应式我们需要导入vue中的ref或者active
+
+```js
+import {active} from "vue"
+let counter = 100
+const status = acrive({//active传过去的是一个对象
+    counter, //把counter添加为响应式
+})
+import {ref} from "vue"
+let counter = 100
+counter = ref(100)
+
+```
+
+```js
+<template>
+{{counter}}	//因为ref在template标签中有自动解包  而且只是浅层解包，就是你把counter在赋值给一个te  st对象时，无法解包，我们只能test.counter.value才能拿到值  
+</template>
+import {ref} from "vue"
+let counter = 100
+counter = ref(100)//counter返回的是一个ref的对象，我们传过去的值会传给ref.value中
+setup({//在setup中不能解包，所以我们想使用这个值时必须带.value
+    console.log(counter.value)//100
+    
+})
+
+```
+
+### readonly
+
+readonly的原理
+
+```js
+//是使用了proxy代理劫持
+const test = {
+    name:"zhansan"
+}
+const readonlytest = new Proxy(test,{
+    get(test,key){
+        return test[key] //返回原先的值
+    },
+    set(test,key){
+    warning()//这里会发出警告
+}
+})
+```
+
+vue给我封装好了这个readonly方法我们就可以直接使用了
+
+```js
+const test = {
+    name:"zhansan"
+}
+const readolytest = readonly(test)
+readonlytest.name = "test"//无法更改发出警告
+```
+
+### 常用的Reactive API
+
+![image-20220219003053190](C:\Users\ye\AppData\Roaming\Typora\typora-user-images\image-20220219003053190.png)
+
+### toRefs
+
+当一个对象已经用reactive包裹住，就是响应式的，如果我们把这个响应式的对象解构分别给N个变量的话，这些变量也不是响应式的。这个包裹的一定得是一个响应式的对象，不能是一个普通的对象
+
+```js
+const test = reactive({
+    name:"zhangsan",
+    age:18
+})
+let {name,age} = test //结构出来的变量，是没有响应式的
+let {name,age} = toRefs(test) //这个是有响应式的，原理是把这个test对象传进去，然后把这个对象里边的属性使用ref包裹
+let age = toRef(test,"age")//单个赋值，提高性能
+
+```
+
+
+
