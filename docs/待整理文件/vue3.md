@@ -382,5 +382,35 @@ let age = toRef(test,"age")//单个赋值，提高性能
 
 ```
 
+### watch监听器
+
+watch API在vue3中有两种用法
+
+watch可以传的值
+
+```js
+//watch的第一个参数可以ref对象，reactive对象，函数，数组，数组中也只能包含ref对象，reactive对象，函数，vue源码中会做一个判断如果是数组就会遍历判断数组中那些元素是什么类型然后做对应的操作
+watch(ref|reactive|function|arry,(newValue,oldValue){
+      //值一旦发生改变就会触发该函数
+      },
+    {
+        //option 类似于deep：true
+        deep:true,
+        immedate:true
+    })
+```
 
 
+
+1. 如果监听的是reactive对象，我们需要在watch的第一个形参为geter函数
+
+```js
+let info = reactive({name:"zhangshan"})
+watch(()=>info.name,(newValue，oldValue){
+//值改变了做什么操作
+})
+```
+
+2.  
+
+  
