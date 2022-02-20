@@ -419,3 +419,21 @@ setup(){
 
 ```
 
+### vue3中生命周期的使用
+
+```js
+import {onMounted,onUpdate} from "vue"   //有区别于vue2，一是需要导入需要的生命周期，二是前面加个on
+//使用生命周期
+setup(){
+    onMounted(()=>{
+        console.log("onMounted")
+    }),//挂载后则会回调这个函数
+    onMounted(()=>{
+        console.log("onMounted2")  //可以写多个的mounted
+    })
+}
+```
+
+### beforecreate和created
+
+在vue3中把这两个生命周期给取消了，因为这个生命周期可以写在setup里面setup执行的更早
