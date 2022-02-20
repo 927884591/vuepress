@@ -382,5 +382,40 @@ let age = toRef(test,"age")//单个赋值，提高性能
 
 ```
 
+### computed
 
+computed就是计算属性
+
+```js
+import { ref,computed} from "vue"
+setup(){
+    let firstName = ref("zhan");
+let lastName = ref("san");
+//我们希望template标签中合并两个
+let fullName = computed(()=>firstName.value +lastName.value)
+return {
+    firstName,
+    lastName,
+    fullName
+}
+}
+
+```
+
+### ref获取DOM元素
+
+```js
+<template>
+<h2 ref="title"></h2>
+</template>
+import { ref} from "vue"
+setup(){
+    let title = ref(null);
+    return{
+        titile
+    }
+}
+
+
+```
 
